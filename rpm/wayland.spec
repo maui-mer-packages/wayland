@@ -101,5 +101,6 @@ rm -rf %{buildroot}
 %{_datadir}/aclocal/wayland-scanner.m4
 %{_datadir}/wayland/wayland-scanner.mk
 %{_datadir}/wayland/wayland.xml
+${_datadir}/pkgconfig/wayland-scanner.pc
 
 # << files devel
