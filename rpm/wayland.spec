@@ -9,15 +9,15 @@ Name:       wayland
 # << macros
 
 Summary:    wayland compositor
-Version:    1.1.0
+Version:    1.3.0
 Release:    1
 Group:      System/Libraries
 License:    MIT
 URL:        http://wayland.freedesktop.org/
 Source0:    wayland-%{version}.tar.xz
 Source100:  wayland.yaml
-Patch0:     0001-client-Add-acquire-fd-API-to-avoid-requiring-a-polli.patch
-Patch1:     0002-wl_map_reserve_new-Work-around-client-thread-unsafet.patch
+#Patch0:     0001-client-Add-acquire-fd-API-to-avoid-requiring-a-polli.patch
+#Patch1:     0002-wl_map_reserve_new-Work-around-client-thread-unsafet.patch
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires:  pkgconfig(libffi)
@@ -40,9 +40,9 @@ devel files for wayland
 %setup -q -n %{name}-%{version}/wayland
 
 # 0001-client-Add-acquire-fd-API-to-avoid-requiring-a-polli.patch
-%patch0 -p1
+#%patch0 -p1
 # 0002-wl_map_reserve_new-Work-around-client-thread-unsafet.patch
-%patch1 -p1
+#%patch1 -p1
 # >> setup
 # << setup
 
@@ -75,8 +75,6 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 # >> files
-%{_bindir}/wayland-scanner
-#%{_sysconfdir}/udev/*.rules
 %{_libdir}/libwayland-client.so.0*
 %{_libdir}/libwayland-cursor.so.0*
 %{_libdir}/libwayland-server.so.0*
@@ -85,6 +83,7 @@ rm -rf %{buildroot}
 %files devel
 %defattr(-,root,root,-)
 # >> files devel
+%{_bindir}/wayland-scanner
 %{_includedir}/wayland-client.h
 %{_includedir}/wayland-client-protocol.h
 %{_includedir}/wayland-cursor.h
@@ -100,6 +99,7 @@ rm -rf %{buildroot}
 %{_libdir}/libwayland-cursor.so
 %{_libdir}/libwayland-server.so
 %{_datadir}/aclocal/wayland-scanner.m4
-%{_datadir}/aclocal/wayland-scanner.mk
+%{_datadir}/wayland/wayland-scanner.mk
+%{_datadir}/wayland/wayland.xml
 
 # << files devel
