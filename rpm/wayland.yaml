@@ -1,25 +1,23 @@
 Name: wayland
 Summary: wayland compositor
-Version: 1.1.0
+Version: 1.3.93
 Release: 1
 Group: System/Libraries
 License: MIT
 URL: http://wayland.freedesktop.org/
 Sources:
     - wayland-%{version}.tar.xz
-Patches:
-    - 0001-client-Add-acquire-fd-API-to-avoid-requiring-a-polli.patch
-    - 0002-wl_map_reserve_new-Work-around-client-thread-unsafet.patch
 Description: wayland is another window System
 
 RequiresPost:
     - /sbin/ldconfig
 RequiresPostUn:
     - /sbin/ldconfig
-PkgBR:
-    - expat-devel
 PkgConfigBR:
+    - expat
     - libffi
+PkgBR:
+    - 
 Configure: reconfigure
 ConfigOptions:
      - --disable-documentation

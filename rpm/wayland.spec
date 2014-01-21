@@ -9,19 +9,17 @@ Name:       wayland
 # << macros
 
 Summary:    wayland compositor
-Version:    1.3.0
+Version:    1.3.93
 Release:    1
 Group:      System/Libraries
 License:    MIT
 URL:        http://wayland.freedesktop.org/
 Source0:    wayland-%{version}.tar.xz
 Source100:  wayland.yaml
-#Patch0:     0001-client-Add-acquire-fd-API-to-avoid-requiring-a-polli.patch
-#Patch1:     0002-wl_map_reserve_new-Work-around-client-thread-unsafet.patch
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
+BuildRequires:  pkgconfig(expat)
 BuildRequires:  pkgconfig(libffi)
-BuildRequires:  expat-devel
 
 %description
 wayland is another window System
@@ -37,12 +35,8 @@ Provides:   wayland-client
 devel files for wayland
 
 %prep
-%setup -q -n %{name}-%{version}/wayland
+%setup -q -n %{name}-%{version}
 
-# 0001-client-Add-acquire-fd-API-to-avoid-requiring-a-polli.patch
-#%patch0 -p1
-# 0002-wl_map_reserve_new-Work-around-client-thread-unsafet.patch
-#%patch1 -p1
 # >> setup
 # << setup
 
