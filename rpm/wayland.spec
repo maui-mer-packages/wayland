@@ -44,6 +44,7 @@ devel files for wayland
 # >> build pre
 # << build pre
 
+cd wayland
 %reconfigure --disable-static \
     --disable-documentation
 
@@ -56,6 +57,7 @@ make %{?jobs:-j%jobs}
 rm -rf %{buildroot}
 # >> install pre
 # << install pre
+cd wayland
 %make_install
 
 # >> install post
