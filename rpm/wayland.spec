@@ -98,5 +98,6 @@ cd wayland
 %{_datadir}/wayland/wayland-scanner.mk
 %{_datadir}/wayland/wayland.xml
 %{_datadir}/pkgconfig/wayland-scanner.pc
+%{_datadir}/wayland/wayland.dtd
 
 # << files devel
