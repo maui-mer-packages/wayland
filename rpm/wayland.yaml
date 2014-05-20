@@ -58,6 +58,7 @@ SubPackages:
       Group: Development/Libraries
       Requires:
           - libwayland-client = %{version}-%{release}
+          - wayland-devel = %{version}-%{release}
       Files:
           - "%{_includedir}/wayland-client*.h"
           - "%{_libdir}/libwayland-client.so"
@@ -76,6 +77,7 @@ SubPackages:
       Group: Development/Libraries
       Requires:
           - libwayland-cursor = %{version}-%{release}
+          - wayland-devel = %{version}-%{release}
       Files:
           - "%{_includedir}/wayland-cursor*.h"
           - "%{_libdir}/libwayland-cursor.so"
@@ -94,6 +96,7 @@ SubPackages:
       Group: Development/Libraries
       Requires:
           - libwayland-server = %{version}-%{release}
+          - wayland-devel = %{version}-%{release}
       Files:
           - "%{_includedir}/wayland-server*.h"
           - "%{_libdir}/libwayland-server.so"

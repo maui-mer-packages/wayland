@@ -50,6 +50,7 @@ Summary:    Headers and symlinks for developing wayland client applications
 Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 Requires:   libwayland-client = %{version}-%{release}
+Requires:   wayland-devel = %{version}-%{release}
 
 %description -n libwayland-client-devel
 Headers and symlinks for developing wayland client applications.
@@ -69,6 +70,7 @@ Summary:    Headers and symlinks for developing wayland cursor applications
 Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 Requires:   libwayland-cursor = %{version}-%{release}
+Requires:   wayland-devel = %{version}-%{release}
 
 %description -n libwayland-cursor-devel
 Headers and symlinks for developing wayland cursor applications.
@@ -88,6 +90,7 @@ Summary:    Headers and symlinks for developing wayland server applications
 Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 Requires:   libwayland-server = %{version}-%{release}
+Requires:   wayland-devel = %{version}-%{release}
 
 %description -n libwayland-server-devel
 Headers and symlinks for developing wayland server applications.
