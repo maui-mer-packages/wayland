@@ -1,32 +1,100 @@
 Name: wayland
-Summary: wayland compositor
 Version: 1.5.0
 Release: 1
+Summary: Wayland Compositor Infrastructure
+Description: |
+  Wayland is a protocol for a compositor to talk to its clients as well as a C
+  library implementation of that protocol. The compositor can be a standalone
+  display server running on Linux kernel modesetting and evdev input devices,
+  an X application, or a wayland client itself. The clients can be traditional
+  applications, X servers (rootless or fullscreen) or other display servers.
 Group: System/Libraries
 License: MIT
 URL: http://wayland.freedesktop.org/
 Sources:
     - wayland-%{version}.tar.xz
-Description: wayland is another window System
+SetupOptions: -q -n %{name}-%{version}/wayland
 
-RequiresPost:
-    - /sbin/ldconfig
-RequiresPostUn:
-    - /sbin/ldconfig
 PkgConfigBR:
     - expat
     - libffi
-PkgBR:
-    - 
+
 Configure: reconfigure
 ConfigOptions:
      - --disable-documentation
 Builder: make
+
+Files:
+    - "%doc README TODO"
+
 SubPackages:
     - Name: devel
-      Summary: wayland devel library
+      Summary: Common headers for wayland
+      Description: Common headers for wayland.
       Group: Development/Libraries
-      Description: devel files for wayland
-      Provides: 
-        - wayland-server
-        - wayland-client
+      Files:
+          - "%{_bindir}/wayland-scanner"
+          - "%{_includedir}/wayland-util.h"
+          - "%{_includedir}/wayland-egl.h"
+          - "%{_includedir}/wayland-version.h"
+          - "%{_datadir}/aclocal/wayland-scanner.m4"
+          - "%{_libdir}/pkgconfig/wayland-scanner.pc"
+          - "%dir %{_datadir}/wayland"
+          - "%{_datadir}/wayland/wayland-scanner.mk"
+          - "%{_datadir}/wayland/wayland.xml"
+          - "%{_datadir}/wayland/wayland.dtd"
+          - "%{_mandir}/man3/*.3*"
+    - Name: libwayland-client
+      AsWholeName: true
+      Summary: Wayland client library
+      Description: Wayland client library.
+      Group: Development/Libraries
+      Files:
+          - "%{_libdir}/libwayland-client.so.0*"
+    - Name: libwayland-client-devel
+      AsWholeName: true
+      Summary: Headers and symlinks for developing wayland client applications
+      Description: Headers and symlinks for developing wayland client applications.
+      Group: Development/Libraries
+      Requires:
+          - libwayland-client = %{version}-%{release}
+      Files:
+          - "%{_includedir}/wayland-client*.h"
+          - "%{_libdir}/libwayland-client.so"
+          - "%{_libdir}/pkgconfig/wayland-client.pc"
+    - Name: libwayland-cursor
+      AsWholeName: true
+      Summary: Wayland cursor library
+      Description: Wayland cursor library.
+      Group: Development/Libraries
+      Files:
+          - "%{_libdir}/libwayland-cursor.so.0*"
+    - Name: libwayland-cursor-devel
+      AsWholeName: true
+      Summary: Headers and symlinks for developing wayland cursor applications
+      Description: Headers and symlinks for developing wayland cursor applications.
+      Group: Development/Libraries
+      Requires:
+          - libwayland-cursor = %{version}-%{release}
+      Files:
+          - "%{_includedir}/wayland-cursor*.h"
+          - "%{_libdir}/libwayland-cursor.so"
+          - "%{_libdir}/pkgconfig/wayland-cursor.pc"
+    - Name: libwayland-server
+      AsWholeName: true
+      Summary: Wayland server library
+      Description: Wayland server library.
+      Group: Development/Libraries
+      Files:
+          - "%{_libdir}/libwayland-server.so.0*"
+    - Name: libwayland-server-devel
+      AsWholeName: true
+      Summary: Headers and symlinks for developing wayland server applications
+      Description: Headers and symlinks for developing wayland server applications.
+      Group: Development/Libraries
+      Requires:
+          - libwayland-server = %{version}-%{release}
+      Files:
+          - "%{_includedir}/wayland-server*.h"
+          - "%{_libdir}/libwayland-server.so"
+          - "%{_libdir}/pkgconfig/wayland-server.pc"

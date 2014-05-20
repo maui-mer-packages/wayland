@@ -8,7 +8,7 @@ Name:       wayland
 # >> macros
 # << macros
 
-Summary:    wayland compositor
+Summary:    Wayland Compositor Infrastructure
 Version:    1.5.0
 Release:    1
 Group:      System/Libraries
@@ -16,26 +16,84 @@ License:    MIT
 URL:        http://wayland.freedesktop.org/
 Source0:    wayland-%{version}.tar.xz
 Source100:  wayland.yaml
-Requires(post): /sbin/ldconfig
-Requires(postun): /sbin/ldconfig
 BuildRequires:  pkgconfig(expat)
 BuildRequires:  pkgconfig(libffi)
 
 %description
-wayland is another window System
+Wayland is a protocol for a compositor to talk to its clients as well as a C
+library implementation of that protocol. The compositor can be a standalone
+display server running on Linux kernel modesetting and evdev input devices,
+an X application, or a wayland client itself. The clients can be traditional
+applications, X servers (rootless or fullscreen) or other display servers.
+
 
 %package devel
-Summary:    wayland devel library
+Summary:    Common headers for wayland
 Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
-Provides:   wayland-server
-Provides:   wayland-client
 
 %description devel
-devel files for wayland
+Common headers for wayland.
+
+%package -n libwayland-client
+Summary:    Wayland client library
+Group:      Development/Libraries
+Requires:   %{name} = %{version}-%{release}
+Requires(post): /sbin/ldconfig
+Requires(postun): /sbin/ldconfig
+
+%description -n libwayland-client
+Wayland client library.
+
+%package -n libwayland-client-devel
+Summary:    Headers and symlinks for developing wayland client applications
+Group:      Development/Libraries
+Requires:   %{name} = %{version}-%{release}
+Requires:   libwayland-client = %{version}-%{release}
+
+%description -n libwayland-client-devel
+Headers and symlinks for developing wayland client applications.
+
+%package -n libwayland-cursor
+Summary:    Wayland cursor library
+Group:      Development/Libraries
+Requires:   %{name} = %{version}-%{release}
+Requires(post): /sbin/ldconfig
+Requires(postun): /sbin/ldconfig
+
+%description -n libwayland-cursor
+Wayland cursor library.
+
+%package -n libwayland-cursor-devel
+Summary:    Headers and symlinks for developing wayland cursor applications
+Group:      Development/Libraries
+Requires:   %{name} = %{version}-%{release}
+Requires:   libwayland-cursor = %{version}-%{release}
+
+%description -n libwayland-cursor-devel
+Headers and symlinks for developing wayland cursor applications.
+
+%package -n libwayland-server
+Summary:    Wayland server library
+Group:      Development/Libraries
+Requires:   %{name} = %{version}-%{release}
+Requires(post): /sbin/ldconfig
+Requires(postun): /sbin/ldconfig
+
+%description -n libwayland-server
+Wayland server library.
+
+%package -n libwayland-server-devel
+Summary:    Headers and symlinks for developing wayland server applications
+Group:      Development/Libraries
+Requires:   %{name} = %{version}-%{release}
+Requires:   libwayland-server = %{version}-%{release}
+
+%description -n libwayland-server-devel
+Headers and symlinks for developing wayland server applications.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q -n %{name}-%{version}/wayland
 
 # >> setup
 # << setup
@@ -62,40 +120,78 @@ rm -rf %{buildroot}
 
 # << install post
 
-%post -p /sbin/ldconfig
+%post -n libwayland-client -p /sbin/ldconfig
 
-%postun -p /sbin/ldconfig
+%postun -n libwayland-client -p /sbin/ldconfig
+
+%post -n libwayland-cursor -p /sbin/ldconfig
+
+%postun -n libwayland-cursor -p /sbin/ldconfig
+
+%post -n libwayland-server -p /sbin/ldconfig
+
+%postun -n libwayland-server -p /sbin/ldconfig
 
 %files
 %defattr(-,root,root,-)
+%doc README TODO
 # >> files
-%{_libdir}/libwayland-client.so.0*
-%{_libdir}/libwayland-cursor.so.0*
-%{_libdir}/libwayland-server.so.0*
 # << files
 
 %files devel
 %defattr(-,root,root,-)
-# >> files devel
 %{_bindir}/wayland-scanner
-%{_includedir}/wayland-client.h
-%{_includedir}/wayland-client-protocol.h
-%{_includedir}/wayland-cursor.h
-%{_includedir}/wayland-egl.h
-%{_includedir}/wayland-server.h
-%{_includedir}/wayland-server-protocol.h
 %{_includedir}/wayland-util.h
+%{_includedir}/wayland-egl.h
 %{_includedir}/wayland-version.h
-%{_libdir}/pkgconfig/wayland-client.pc
-%{_libdir}/pkgconfig/wayland-cursor.pc
-%{_libdir}/pkgconfig/wayland-server.pc
-%{_libdir}/libwayland-client.so
-%{_libdir}/libwayland-cursor.so
-%{_libdir}/libwayland-server.so
 %{_datadir}/aclocal/wayland-scanner.m4
+%{_libdir}/pkgconfig/wayland-scanner.pc
+%dir %{_datadir}/wayland
 %{_datadir}/wayland/wayland-scanner.mk
 %{_datadir}/wayland/wayland.xml
-%{_datadir}/pkgconfig/wayland-scanner.pc
 %{_datadir}/wayland/wayland.dtd
-
+%{_mandir}/man3/*.3*
+# >> files devel
 # << files devel
+
+%files -n libwayland-client
+%defattr(-,root,root,-)
+%{_libdir}/libwayland-client.so.0*
+# >> files libwayland-client
+# << files libwayland-client
+
+%files -n libwayland-client-devel
+%defattr(-,root,root,-)
+%{_includedir}/wayland-client*.h
+%{_libdir}/libwayland-client.so
+%{_libdir}/pkgconfig/wayland-client.pc
+# >> files libwayland-client-devel
+# << files libwayland-client-devel
+
+%files -n libwayland-cursor
+%defattr(-,root,root,-)
+%{_libdir}/libwayland-cursor.so.0*
+# >> files libwayland-cursor
+# << files libwayland-cursor
+
+%files -n libwayland-cursor-devel
+%defattr(-,root,root,-)
+%{_includedir}/wayland-cursor*.h
+%{_libdir}/libwayland-cursor.so
+%{_libdir}/pkgconfig/wayland-cursor.pc
+# >> files libwayland-cursor-devel
+# << files libwayland-cursor-devel
+
+%files -n libwayland-server
+%defattr(-,root,root,-)
+%{_libdir}/libwayland-server.so.0*
+# >> files libwayland-server
+# << files libwayland-server
+
+%files -n libwayland-server-devel
+%defattr(-,root,root,-)
+%{_includedir}/wayland-server*.h
+%{_libdir}/libwayland-server.so
+%{_libdir}/pkgconfig/wayland-server.pc
+# >> files libwayland-server-devel
+# << files libwayland-server-devel
