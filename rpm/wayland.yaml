@@ -43,7 +43,7 @@ SubPackages:
           - "%{_datadir}/wayland/wayland-scanner.mk"
           - "%{_datadir}/wayland/wayland.xml"
           - "%{_datadir}/wayland/wayland.dtd"
-          - "%{_mandir}/man3/*.3*"
+#          - "%{_mandir}/man3/*.3*"
     - Name: libwayland-client
       AsWholeName: true
       Summary: Wayland client library

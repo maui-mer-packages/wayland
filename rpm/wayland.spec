@@ -150,7 +150,6 @@ rm -rf %{buildroot}
 %{_datadir}/wayland/wayland-scanner.mk
 %{_datadir}/wayland/wayland.xml
 %{_datadir}/wayland/wayland.dtd
-%{_mandir}/man3/*.3*
 # >> files devel
 # << files devel
 
