@@ -9,12 +9,12 @@ Name:       wayland
 # << macros
 
 Summary:    Wayland Compositor Infrastructure
-Version:    1.5.0
+Version:    1.6.0
 Release:    1
 Group:      System/Libraries
 License:    MIT
 URL:        http://wayland.freedesktop.org/
-Source0:    wayland-%{version}.tar.xz
+Source0:    %{name}-%{version}.tar.xz
 Source100:  wayland.yaml
 BuildRequires:  pkgconfig(expat)
 BuildRequires:  pkgconfig(libffi)
