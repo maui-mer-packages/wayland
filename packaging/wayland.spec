@@ -96,7 +96,7 @@ Requires:   wayland-devel = %{version}-%{release}
 Headers and symlinks for developing wayland server applications.
 
 %prep
-%setup -q -n %{name}-%{version}/wayland
+%setup -q -n %{name}-%{version}
 
 # >> setup
 # << setup

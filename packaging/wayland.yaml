@@ -12,8 +12,8 @@ Group: System/Libraries
 License: MIT
 URL: http://wayland.freedesktop.org/
 Sources:
-    - wayland-%{version}.tar.xz
-SetupOptions: -q -n %{name}-%{version}/wayland
+    - "%{name}-%{version}.tar.xz"
+SetupOptions: -q -n %{name}-%{version}
 
 PkgConfigBR:
     - expat
